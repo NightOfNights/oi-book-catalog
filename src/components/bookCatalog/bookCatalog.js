@@ -90,6 +90,10 @@ const BookCatalog = ({ books, onBookDelete, onBookEdit, onBookAdd }) => {
     setSortBy(event.target.value);
   };
 
+  const handleClickAdd = () => {
+    onBookAdd();
+  };
+
   const handleClickDelete = (id) => {
     onBookDelete(id);
   };
@@ -162,7 +166,9 @@ const BookCatalog = ({ books, onBookDelete, onBookEdit, onBookAdd }) => {
           </Radio.Group>
         </div>
         <div>
-          <Button type="primary">Add new book</Button>
+          <Button type="primary" onClick={handleClickAdd}>
+            Add new book
+          </Button>
         </div>
         <div>
           {recommendedBookCard}

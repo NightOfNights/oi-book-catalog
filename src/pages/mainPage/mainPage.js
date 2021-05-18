@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useFirebase } from '../../hooks/useFirebase';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 import { Spin } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
-import { BookCatalog } from '../../components';
+import { BookCatalog, BookModal } from '../../components';
 import './mainPage.scss';
 
 const MainPage = () => {
+  const [isAddBookModalVisible, setIsAddBookModalVisible] = useState(false);
+
   const { firestore } = useFirebase();
 
   const [books, loading, error] = useCollectionData(
@@ -25,13 +27,23 @@ const MainPage = () => {
     console.log('edit');
   };
 
+  const handleAddBookModalClickOk = async (data) => {
+    setIsAddBookModalVisible(false);
+    const res = await firestore.collection('books').add(data);
+    console.log(res);
+  };
+
+  const handleAddBookModalClickCancel = () => {
+    setIsAddBookModalVisible(false);
+  };
+
   const handleBookDelete = async (id) => {
     const res = await firestore.collection('books').doc(id).delete();
     console.log(res);
   };
 
-  const handleBookAdd = () => {
-    console.log('add');
+  const handleBookAddButtonClick = () => {
+    setIsAddBookModalVisible(true);
   };
 
   return (
@@ -47,9 +59,14 @@ const MainPage = () => {
           books={books}
           onBookEdit={handleBookEdit}
           onBookDelete={handleBookDelete}
-          onBookAdd={handleBookAdd}
+          onBookAdd={handleBookAddButtonClick}
         />
       )}
+      <BookModal
+        isModalVisible={isAddBookModalVisible}
+        onClickOk={handleAddBookModalClickOk}
+        onClickCancel={handleAddBookModalClickCancel}
+      />
     </div>
   );
 };
