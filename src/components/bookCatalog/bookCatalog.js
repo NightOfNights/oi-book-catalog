@@ -98,9 +98,8 @@ const BookCatalog = ({ books, onBookDelete, onBookEdit, onBookAdd }) => {
     onBookDelete(id);
   };
 
-  const handleClickEdit = (editedBookCard) => {
-    console.log(editedBookCard);
-    onBookEdit();
+  const handleClickEdit = (bookCard) => {
+    onBookEdit(bookCard);
   };
 
   const booksSortedByKey = groupBooksByKeyWithSort(books, sortBy);

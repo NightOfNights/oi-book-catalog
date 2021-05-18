@@ -8,6 +8,8 @@ import './mainPage.scss';
 
 const MainPage = () => {
   const [isAddBookModalVisible, setIsAddBookModalVisible] = useState(false);
+  const [isEditBookModalVisible, setIsEditBookModalVisible] = useState(false);
+  const [currentEditingBook, setCurrentEditingBook] = useState({});
 
   const { firestore } = useFirebase();
 
@@ -23,8 +25,9 @@ const MainPage = () => {
     console.log(books);
   }
 
-  const handleBookEdit = () => {
-    console.log('edit');
+  const handleBookDelete = async (id) => {
+    const res = await firestore.collection('books').doc(id).delete();
+    console.log(res);
   };
 
   const handleAddBookModalClickOk = async (data) => {
@@ -37,13 +40,34 @@ const MainPage = () => {
     setIsAddBookModalVisible(false);
   };
 
-  const handleBookDelete = async (id) => {
-    const res = await firestore.collection('books').doc(id).delete();
+  const handleAddBookButtonClick = () => {
+    setIsAddBookModalVisible(true);
+  };
+
+  const handleEditBookButtonClick = (bookCard) => {
+    setIsEditBookModalVisible(true);
+    setCurrentEditingBook(bookCard);
+  };
+
+  const handleEditBookModalClickOk = async (data) => {
+    const editedData = {
+      ...data,
+      publicationYear: data.publicationYear ? data.publicationYear : null,
+      rating: data.rating || data.rating === 0 ? data.rating : null,
+      isbn: data.isbn ? data.isbn : null,
+    };
+    console.log(editedData);
+    setIsEditBookModalVisible(false);
+    const res = await firestore
+      .collection('books')
+      .doc(currentEditingBook.id)
+      .update(editedData);
+
     console.log(res);
   };
 
-  const handleBookAddButtonClick = () => {
-    setIsAddBookModalVisible(true);
+  const handleEditBookModalClickCancel = () => {
+    setIsEditBookModalVisible(false);
   };
 
   return (
@@ -57,15 +81,26 @@ const MainPage = () => {
       ) : (
         <BookCatalog
           books={books}
-          onBookEdit={handleBookEdit}
+          onBookEdit={handleEditBookButtonClick}
           onBookDelete={handleBookDelete}
-          onBookAdd={handleBookAddButtonClick}
+          onBookAdd={handleAddBookButtonClick}
         />
       )}
       <BookModal
         isModalVisible={isAddBookModalVisible}
         onClickOk={handleAddBookModalClickOk}
         onClickCancel={handleAddBookModalClickCancel}
+      />
+      <BookModal
+        isModalVisible={isEditBookModalVisible}
+        editModal
+        onClickOk={handleEditBookModalClickOk}
+        onClickCancel={handleEditBookModalClickCancel}
+        name={currentEditingBook.name}
+        author={currentEditingBook.author}
+        publicationYear={currentEditingBook?.publicationYear}
+        rating={currentEditingBook?.rating}
+        isbn={currentEditingBook?.isbn}
       />
     </div>
   );

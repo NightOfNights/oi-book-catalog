@@ -33,6 +33,9 @@ const BookModal = ({
 
   useEffect(() => {
     if (rating) setRatingInputValue(rating);
+    return () => {
+      setRatingInputValue(0);
+    };
   }, [rating]);
 
   const handleClickOk = (formData) => {
