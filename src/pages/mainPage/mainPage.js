@@ -3,6 +3,7 @@ import { useFirebase } from '../../hooks/useFirebase';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 import { Spin } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
+import { BookCatalog } from '../../components';
 import './mainPage.scss';
 
 const MainPage = () => {
@@ -20,6 +21,19 @@ const MainPage = () => {
     console.log(books);
   }
 
+  const handleBookEdit = () => {
+    console.log('edit');
+  };
+
+  const handleBookDelete = async (id) => {
+    const res = await firestore.collection('books').doc(id).delete();
+    console.log(res);
+  };
+
+  const handleBookAdd = () => {
+    console.log('add');
+  };
+
   return (
     <div>
       Main Page
@@ -29,7 +43,12 @@ const MainPage = () => {
       ) : error ? (
         <div>error</div>
       ) : (
-        <div>asd</div>
+        <BookCatalog
+          books={books}
+          onBookEdit={handleBookEdit}
+          onBookDelete={handleBookDelete}
+          onBookAdd={handleBookAdd}
+        />
       )}
     </div>
   );
