@@ -32,7 +32,7 @@ const BookCard = ({
     >
       <div className="book-card__wrapper">
         <div className="book-card__info">
-          <p className="book-card__item">{`Author: ${author.join(' ; ')}`}</p>
+          <p className="book-card__item">{`Author: ${author.join('; ')}`}</p>
           {publicationYear ? (
             <p className="book-card__item">{`Publication year: ${publicationYear}`}</p>
           ) : null}
