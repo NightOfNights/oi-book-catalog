@@ -1,0 +1,25 @@
+.book-card {
+  &:first-child {
+    height: 100%;
+  }
+
+  &__wrapper {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  &__buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    width: 60%;
+    margin-left: 40%;
+    flex-wrap: wrap;
+  }
+
+  &__button {
+    flex: 1 1 0px;
+  }
+}
