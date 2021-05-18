@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Card, Button } from 'antd';
+import { Card, Button, Popconfirm } from 'antd';
 import './bookCard.scss';
+
+const popConfirmDeleteMessage = 'Are you sure to delete this book?';
 
 const BookCard = ({
   id,
@@ -46,14 +48,17 @@ const BookCard = ({
             </Button>
           ) : null}
           {onClickDelete ? (
-            <Button
-              type="primary"
-              danger
-              onClick={handleClickDelete}
-              className="book-card__button"
+            <Popconfirm
+              title={popConfirmDeleteMessage}
+              icon={null}
+              onConfirm={handleClickDelete}
+              okText="Yes"
+              cancelText="No"
             >
-              Delete
-            </Button>
+              <Button type="primary" danger className="book-card__button">
+                Delete
+              </Button>
+            </Popconfirm>
           ) : null}
         </div>
       </div>
