@@ -27,7 +27,7 @@ const BookModal = ({
   author,
   rating,
   publicationYear,
-  isbn,
+  ISBN,
 }) => {
   const [ratingInputValue, setRatingInputValue] = useState(0);
 
@@ -45,7 +45,7 @@ const BookModal = ({
       { author: formData.author.split(';').map((item) => item.trim()) },
       formData.publicationYear && { publicationYear: formData.publicationYear },
       typeof ratingInputValue === 'number' && { rating: ratingInputValue },
-      formData.isbn && { isbn: formData.isbn }
+      formData.ISBN && { ISBN: formData.ISBN }
     );
 
     onClickOk(formDataToSubmit);
@@ -74,10 +74,10 @@ const BookModal = ({
         {...formLayout}
         onFinish={handleClickOk}
         initialValues={{
-          name: name,
+          name,
           author: author ? author.join('; ') : '',
-          publicationYear: publicationYear,
-          isbn: isbn,
+          publicationYear,
+          ISBN,
         }}
         className="book-modal__form form"
       >
@@ -152,7 +152,7 @@ const BookModal = ({
         </Form.Item>
         <Form.Item
           label="ISBN"
-          name="isbn"
+          name="ISBN"
           rules={[
             () => ({
               validator(_, value) {
@@ -197,7 +197,7 @@ BookModal.propTypes = {
   author: PropTypes.arrayOf(PropTypes.string),
   rating: PropTypes.number,
   publicationYear: PropTypes.number,
-  isbn: PropTypes.string,
+  ISBN: PropTypes.string,
 };
 
 export default BookModal;

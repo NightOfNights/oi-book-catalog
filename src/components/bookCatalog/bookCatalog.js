@@ -26,9 +26,10 @@ const groupBooksByKeyWithSort = (arr, key) => {
     .reduce((currentArr, item) => {
       if (key === author) {
         for (const author of item[key]) {
-          currentArr[author] = [...(currentArr[author] || []), item];
+          if (author.length)
+            currentArr[author] = [...(currentArr[author] || []), item];
         }
-      } else if (item[key]) {
+      } else if (item[key] || item[key] === 0) {
         const currentKey = item[key];
         currentArr[currentKey] = [...(currentArr[currentKey] || []), item];
       } else {
@@ -116,7 +117,7 @@ const BookCatalog = ({ books, onBookDelete, onBookEdit, onBookAdd }) => {
       author={recommendedBook.author}
       publicationYear={recommendedBook?.publicationYear}
       rating={recommendedBook?.rating}
-      isbn={recommendedBook?.ISBN}
+      ISBN={recommendedBook?.ISBN}
     />
   ) : null;
 
@@ -136,7 +137,7 @@ const BookCatalog = ({ books, onBookDelete, onBookEdit, onBookAdd }) => {
                   author={book.author}
                   publicationYear={book?.publicationYear}
                   rating={book?.rating}
-                  isbn={book?.ISBN}
+                  ISBN={book?.ISBN}
                   onClickDelete={handleClickDelete}
                   onClickEdit={handleClickEdit}
                 />

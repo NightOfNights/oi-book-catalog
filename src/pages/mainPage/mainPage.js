@@ -54,7 +54,7 @@ const MainPage = () => {
       ...data,
       publicationYear: data.publicationYear ? data.publicationYear : null,
       rating: data.rating || data.rating === 0 ? data.rating : null,
-      isbn: data.isbn ? data.isbn : null,
+      ISBN: data.ISBN ? data.ISBN : null,
     };
     console.log(editedData);
     setIsEditBookModalVisible(false);
@@ -100,7 +100,7 @@ const MainPage = () => {
         author={currentEditingBook.author}
         publicationYear={currentEditingBook?.publicationYear}
         rating={currentEditingBook?.rating}
-        isbn={currentEditingBook?.isbn}
+        ISBN={currentEditingBook?.ISBN}
       />
     </div>
   );

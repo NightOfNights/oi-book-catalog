@@ -9,7 +9,7 @@ const BookCard = ({
   id,
   name,
   author,
-  isbn,
+  ISBN,
   rating,
   publicationYear,
   onClickDelete,
@@ -20,7 +20,7 @@ const BookCard = ({
   };
 
   const handleClickEdit = () => {
-    onClickEdit({ id, name, author, isbn, rating, publicationYear });
+    onClickEdit({ id, name, author, ISBN, rating, publicationYear });
   };
 
   return (
@@ -36,10 +36,10 @@ const BookCard = ({
           {publicationYear ? (
             <p className="book-card__item">{`Publication year: ${publicationYear}`}</p>
           ) : null}
-          {rating ? (
+          {rating || rating === 0 ? (
             <p className="book-card__item">{`Rating: ${rating}`}</p>
           ) : null}
-          {isbn ? <p className="book-card__item">{`ISBN: ${isbn}`}</p> : null}
+          {ISBN ? <p className="book-card__item">{`ISBN: ${ISBN}`}</p> : null}
         </div>
         <div className="book-card__buttons">
           {onClickEdit ? (
@@ -70,7 +70,7 @@ BookCard.propTypes = {
   id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   author: PropTypes.arrayOf(PropTypes.string).isRequired,
-  isbn: PropTypes.string,
+  ISBN: PropTypes.string,
   rating: PropTypes.number,
   publicationYear: PropTypes.number,
   onClickDelete: PropTypes.func,
