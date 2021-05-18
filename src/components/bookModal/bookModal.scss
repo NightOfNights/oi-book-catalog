@@ -1,0 +1,38 @@
+.book-modal {
+  & > div {
+    border-radius: 5px;
+  }
+
+  &__header {
+    text-align: center;
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin: 10px 0;
+  }
+}
+
+.form {
+  &__item {
+    margin: 0 0 10px;
+  }
+
+  &__item > * {
+    padding: 0 !important;
+  }
+
+  &__input-number {
+    width: 100% !important;
+  }
+
+  &__footer {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 20px;
+  }
+
+  &__footer > button {
+    width: 100%;
+    border-radius: 2px;
+  }
+}
