@@ -84,7 +84,11 @@ const MainPage = () => {
       <Row justify="center" className="main-page__wrapper-row">
         <Col {...colSize} className="main-page__wrapper-col">
           {loading ? (
-            <Spin indicator={loadingIcon} className="main-page__spinner" />
+            <Spin
+              indicator={loadingIcon}
+              size="large"
+              className="main-page__spinner"
+            />
           ) : error ? (
             <div className="main-page__error">
               <span className="main-page__error-message">Error!</span>
