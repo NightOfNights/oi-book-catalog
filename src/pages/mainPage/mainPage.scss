@@ -10,6 +10,11 @@
     background-color: var(--main-bg);
   }
 
+  &__spinner {
+    width: 100%;
+    margin: auto;
+  }
+
   &__loading-icon {
     font-size: 24px;
   }
