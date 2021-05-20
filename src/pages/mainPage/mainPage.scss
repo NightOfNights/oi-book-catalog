@@ -1,4 +1,15 @@
 .main-page {
+  height: 100vh;
+  background-color: var(--main-bg);
+
+  &__header {
+    background-color: var(--header-bg);
+  }
+
+  &__wrapper-row {
+    background-color: var(--main-bg);
+  }
+
   &__loading-icon {
     font-size: 24px;
   }

@@ -172,14 +172,10 @@ const BookModal = ({
           <Input placeholder="ISBN" className="form__input" />
         </Form.Item>
         <div className="form__footer">
-          <Button onClick={handleClickCancel} className="form__submit-button">
+          <Button onClick={handleClickCancel} className="form__button">
             Cancel
           </Button>
-          <Button
-            type="primary"
-            htmlType="submit"
-            className="form__cancel-button"
-          >
+          <Button type="primary" htmlType="submit" className="form__button">
             OK
           </Button>
         </div>

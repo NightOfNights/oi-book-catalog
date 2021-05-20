@@ -28,39 +28,47 @@ const BookCard = ({
       title={name}
       className="book-card"
       style={{ display: 'flex', flexDirection: 'column' }}
+      headStyle={{ textAlign: 'center', fontWeight: 600 }}
       bodyStyle={{ flexGrow: 2 }}
     >
       <div className="book-card__wrapper">
         <div className="book-card__info">
-          <p className="book-card__item">{`Author: ${author.join('; ')}`}</p>
+          <span className="book-card__item">{`Author: ${author.join(
+            '; '
+          )}`}</span>
           {publicationYear ? (
-            <p className="book-card__item">{`Publication year: ${publicationYear}`}</p>
+            <span className="book-card__item">{`Publication year: ${publicationYear}`}</span>
           ) : null}
           {rating || rating === 0 ? (
-            <p className="book-card__item">{`Rating: ${rating}`}</p>
+            <span className="book-card__item">{`Rating: ${rating}`}</span>
           ) : null}
-          {ISBN ? <p className="book-card__item">{`ISBN: ${ISBN}`}</p> : null}
+          {ISBN ? (
+            <span className="book-card__item">{`ISBN: ${ISBN}`}</span>
+          ) : null}
         </div>
-        <div className="book-card__buttons">
-          {onClickEdit ? (
-            <Button onClick={handleClickEdit} className="book-card__button">
-              Edit
-            </Button>
-          ) : null}
-          {onClickDelete ? (
-            <Popconfirm
-              title={popConfirmDeleteMessage}
-              icon={null}
-              onConfirm={handleClickDelete}
-              okText="Yes"
-              cancelText="No"
-            >
-              <Button type="primary" danger className="book-card__button">
-                Delete
+        {onClickDelete || onClickEdit ? (
+          <div className="book-card__buttons">
+            {onClickEdit ? (
+              <Button onClick={handleClickEdit} className="book-card__button">
+                Edit
               </Button>
-            </Popconfirm>
-          ) : null}
-        </div>
+            ) : null}
+            {onClickDelete ? (
+              <Popconfirm
+                title={popConfirmDeleteMessage}
+                icon={null}
+                onConfirm={handleClickDelete}
+                okText="Yes"
+                cancelText="No"
+                className="book-card__pop-confirm"
+              >
+                <Button type="primary" danger className="book-card__button">
+                  Delete
+                </Button>
+              </Popconfirm>
+            ) : null}
+          </div>
+        ) : null}
       </div>
     </Card>
   );

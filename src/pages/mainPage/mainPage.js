@@ -1,10 +1,17 @@
 import React, { useState } from 'react';
 import { useFirebase } from '../../hooks/useFirebase';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
-import { Spin } from 'antd';
+import { Spin, Col, Row } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
 import { BookCatalog, BookModal } from '../../components';
 import './mainPage.scss';
+
+const colSize = {
+  xs: { span: 24 },
+  sm: { span: 24 },
+  md: { span: 16 },
+  lg: { span: 16 },
+};
 
 const MainPage = () => {
   const [isAddBookModalVisible, setIsAddBookModalVisible] = useState(false);
@@ -17,13 +24,6 @@ const MainPage = () => {
     firestore.collection('books'),
     { idField: 'id' }
   );
-
-  const loadingIcon = (
-    <LoadingOutlined className="main-page__loading-icon" spin />
-  );
-  if (books) {
-    console.log(books);
-  }
 
   const handleBookDelete = async (id) => {
     const res = await firestore.collection('books').doc(id).delete();
@@ -70,26 +70,41 @@ const MainPage = () => {
     setIsEditBookModalVisible(false);
   };
 
+  const loadingIcon = (
+    <LoadingOutlined className="main-page__loading-icon" spin />
+  );
+
   return (
-    <div>
-      Main Page
-      <div>{'books'}</div>
-      {loading ? (
-        <Spin indicator={loadingIcon} />
-      ) : error ? (
-        <div>error</div>
-      ) : (
-        <BookCatalog
-          books={books}
-          onBookEdit={handleEditBookButtonClick}
-          onBookDelete={handleBookDelete}
-          onBookAdd={handleAddBookButtonClick}
-        />
-      )}
+    <Col span={24} className="main-page">
+      <Row justify="center" className="main-page__header header">
+        <Col {...colSize} className="header__wrapper">
+          Navbar
+        </Col>
+      </Row>
+      <Row justify="center" className="main-page__wrapper-row">
+        <Col {...colSize} className="main-page__wrapper-col">
+          {loading ? (
+            <Spin indicator={loadingIcon} className="main-page__spinner" />
+          ) : error ? (
+            <div className="main-page__error">
+              <span className="main-page__error-message">Error!</span>
+            </div>
+          ) : (
+            <BookCatalog
+              books={books}
+              onBookEdit={handleEditBookButtonClick}
+              onBookDelete={handleBookDelete}
+              onBookAdd={handleAddBookButtonClick}
+              className="main-page__book-catalog"
+            />
+          )}
+        </Col>
+      </Row>
       <BookModal
         isModalVisible={isAddBookModalVisible}
         onClickOk={handleAddBookModalClickOk}
         onClickCancel={handleAddBookModalClickCancel}
+        className="main-page__book-modal"
       />
       <BookModal
         isModalVisible={isEditBookModalVisible}
@@ -101,8 +116,9 @@ const MainPage = () => {
         publicationYear={currentEditingBook?.publicationYear}
         rating={currentEditingBook?.rating}
         ISBN={currentEditingBook?.ISBN}
+        className="main-page__book-modal"
       />
-    </div>
+    </Col>
   );
 };
 

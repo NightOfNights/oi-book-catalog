@@ -11,6 +11,7 @@ const publicationYear = 'publicationYear';
 const rating = 'rating';
 const noKey = 'noKey';
 const noKeyHeader = 'Not specified';
+const recommendedBookTitle = 'Recommended Book';
 
 const groupBooksByKeyWithSort = (arr, key) => {
   const newArr = [...arr];
@@ -42,7 +43,6 @@ const groupBooksByKeyWithSort = (arr, key) => {
 
 const getSortedBookCatalogKeys = (books, isNumberKeys = false) => {
   const bookCatalogKeys = Object.keys(books);
-  console.log(bookCatalogKeys);
   let hasNoKeys = false;
 
   if (noKey in bookCatalogKeys) {
@@ -110,27 +110,35 @@ const BookCatalog = ({ books, onBookDelete, onBookEdit, onBookAdd }) => {
       : getSortedBookCatalogKeys(booksSortedByKey, true);
   const recommendedBook = selectRecommendedBookFromCatalog(books);
 
-  const recommendedBookCard = recommendedBook ? (
-    <BookCard
-      id={recommendedBook.id}
-      name={recommendedBook.name}
-      author={recommendedBook.author}
-      publicationYear={recommendedBook?.publicationYear}
-      rating={recommendedBook?.rating}
-      ISBN={recommendedBook?.ISBN}
-    />
+  const recommendedBookPanel = recommendedBook ? (
+    <Panel
+      header={recommendedBookTitle}
+      key={0}
+      className="book-catalog__panel"
+    >
+      <BookCard
+        id={recommendedBook.id}
+        name={recommendedBook.name}
+        author={recommendedBook.author}
+        publicationYear={recommendedBook?.publicationYear}
+        rating={recommendedBook?.rating}
+        ISBN={recommendedBook?.ISBN}
+        className="book-catalog__book-card"
+      />
+    </Panel>
   ) : null;
 
   const bookList = sortedBookKeys.reduce((currentResult, currentValue, idx) => {
     const panel = (
       <Panel
         header={currentValue === noKey ? noKeyHeader : currentValue}
-        key={idx}
+        key={idx + 1}
+        className="book-catalog__panel"
       >
-        <Row gutter={16}>
+        <Row gutter={16} className="book-catalog__panel-row">
           {booksSortedByKey[currentValue].map((book) => {
             return (
-              <Col span={8} key={book.id} className="book-catalog__col">
+              <Col span={8} key={book.id} className="book-catalog__panel-col">
                 <BookCard
                   id={book.id}
                   name={book.name}
@@ -140,6 +148,7 @@ const BookCatalog = ({ books, onBookDelete, onBookEdit, onBookAdd }) => {
                   ISBN={book?.ISBN}
                   onClickDelete={handleClickDelete}
                   onClickEdit={handleClickEdit}
+                  className="book-catalog__book-card"
                 />
               </Col>
             );
@@ -152,29 +161,40 @@ const BookCatalog = ({ books, onBookDelete, onBookEdit, onBookAdd }) => {
     return currentResult;
   }, []);
 
-  console.log(booksSortedByKey);
-
   return (
     <div className="book-catalog">
       <div className="book-catalog__wrapper">
-        <div>
-          <span>Sort by: </span>
-          <Radio.Group onChange={handleSortByChange} value={sortBy}>
-            <Radio value={publicationYear}>Publication year</Radio>
-            <Radio value={rating}>Rating</Radio>
-            <Radio value={author}>Author</Radio>
-          </Radio.Group>
-        </div>
-        <div>
-          <Button type="primary" onClick={handleClickAdd}>
+        <div className="book-catalog__control-panel">
+          <div className="book-catalog__radio radio">
+            <span className="radio__title">Sort by: </span>
+            <Radio.Group
+              onChange={handleSortByChange}
+              value={sortBy}
+              className="radio__group"
+            >
+              <Radio value={publicationYear} className="radio__option">
+                Publication year
+              </Radio>
+              <Radio value={rating} className="radio__option">
+                Rating
+              </Radio>
+              <Radio value={author} className="radio__option">
+                Author
+              </Radio>
+            </Radio.Group>
+          </div>
+          <Button
+            type="primary"
+            onClick={handleClickAdd}
+            className="book-catalog__button"
+          >
             Add new book
           </Button>
         </div>
-        <div>
-          {recommendedBookCard}
-          <Collapse defaultActiveKey={['0']}>{bookList}</Collapse>
-        </div>
-        <div>Book Catalog</div>
+        <Collapse defaultActiveKey={['0']} className="book-catalog__collapse">
+          {recommendedBookPanel}
+          {bookList}
+        </Collapse>
       </div>
     </div>
   );
