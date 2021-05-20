@@ -78,7 +78,7 @@ const MainPage = () => {
     <Col span={24} className="main-page">
       <Row justify="center" className="main-page__header header">
         <Col {...colSize} className="header__wrapper">
-          Navbar
+          <div className="header__title">Book Catalog</div>
         </Col>
       </Row>
       <Row justify="center" className="main-page__wrapper-row">
