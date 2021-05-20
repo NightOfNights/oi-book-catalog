@@ -72,6 +72,8 @@ const selectRecommendedBookFromCatalog = (books) => {
     (item) => item.publicationYear > bookYearRestriction
   );
 
+  if (filteredBooks.length === 0) return null;
+
   const highestBookRating = filteredBooks.reduce((a, b) =>
     a.rating > b.rating ? a : b
   ).rating;
