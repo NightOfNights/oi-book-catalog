@@ -1,8 +1,23 @@
 # oi-book-catalog
 
+## Required environment variables
+
+### Firebase Config: 
+* REACT_APP_API_KEY
+* REACT_APP_AUTH_DOMAIN
+* REACT_APP_PROJECT_ID
+* REACT_APP_STORAGE_BUCKET
+* REACT_APP_MESSAGING_SENDER_ID
+* REACT_APP_APP_ID
+* REACT_APP_MEASUREMENT_ID
+
 ## Available Scripts
 
 In the project directory, you can run:
+
+### `npm install`
+
+Installs all necessary dependencies.
 
 ### `npm start`
 
