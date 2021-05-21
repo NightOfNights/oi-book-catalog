@@ -119,10 +119,16 @@ const BookCatalog = ({ books, onBookDelete, onBookEdit, onBookAdd }) => {
             Add new book
           </Button>
         </div>
-        <Collapse defaultActiveKey={[0]} className="book-catalog__collapse">
-          {recommendedBookPanel}
-          {bookList}
-        </Collapse>
+        {bookList.length > 0 ? (
+          <Collapse defaultActiveKey={[0]} className="book-catalog__collapse">
+            {recommendedBookPanel}
+            {bookList}
+          </Collapse>
+        ) : (
+          <div className="book-catalog__no-books">
+            <span className="book-catalog__message">No books :(</span>
+          </div>
+        )}
       </div>
     </div>
   );
