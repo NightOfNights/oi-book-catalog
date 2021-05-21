@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import { Card, Button, Popconfirm } from 'antd';
 import './bookCard.scss';
 
-const popConfirmDeleteMessage = 'Are you sure to delete this book?';
+const cardStyle = { display: 'flex', flexDirection: 'column' };
+const cardHeadStyle = { textAlign: 'center', fontWeight: 600 };
+const cardBodyStyle = { flexGrow: 2 };
 
 const BookCard = ({
   id,
@@ -27,9 +29,9 @@ const BookCard = ({
     <Card
       title={name}
       className="book-card"
-      style={{ display: 'flex', flexDirection: 'column' }}
-      headStyle={{ textAlign: 'center', fontWeight: 600 }}
-      bodyStyle={{ flexGrow: 2 }}
+      style={cardStyle}
+      headStyle={cardHeadStyle}
+      bodyStyle={cardBodyStyle}
     >
       <div className="book-card__wrapper">
         <div className="book-card__info">
@@ -55,11 +57,11 @@ const BookCard = ({
             ) : null}
             {onClickDelete ? (
               <Popconfirm
-                title={popConfirmDeleteMessage}
+                title={'Are you sure to delete this book?'}
                 icon={null}
                 onConfirm={handleClickDelete}
-                okText="Yes"
-                cancelText="No"
+                okText={'Yes'}
+                cancelText={'No'}
                 className="book-card__pop-confirm"
               >
                 <Button type="primary" danger className="book-card__button">

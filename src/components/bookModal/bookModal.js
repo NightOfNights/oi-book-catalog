@@ -14,6 +14,7 @@ const formLayout = {
 };
 
 const emptyFieldErrorMessage = 'This field can not be empty!';
+const nameMaxLength = 30;
 const publicationYearMinValue = 1800;
 const publicationYearMaxValue = new Date().getFullYear();
 const isbnRegExp = /^(?=(?:\D*\d){10}(?:(?:\D*\d){3})?$)[\d-]+$/;
@@ -88,6 +89,10 @@ const BookModal = ({
             {
               required: true,
               message: emptyFieldErrorMessage,
+            },
+            {
+              max: nameMaxLength,
+              message: `The maximum length of this field is ${nameMaxLength} characters`,
             },
           ]}
           className="form__item"
