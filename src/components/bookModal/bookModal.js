@@ -92,7 +92,7 @@ const BookModal = ({
             },
             {
               max: nameMaxLength,
-              message: `The maximum length of this field is ${nameMaxLength} characters`,
+              message: `The maximum length of this field is ${nameMaxLength} characters!`,
             },
           ]}
           className="form__item"
@@ -126,12 +126,12 @@ const BookModal = ({
                 }
                 if (value < publicationYearMinValue) {
                   return Promise.reject(
-                    `Publication year can not be yearlier than ${publicationYearMinValue}`
+                    `Publication year can not be yearlier than ${publicationYearMinValue}!`
                   );
                 }
                 if (value > publicationYearMaxValue) {
                   return Promise.reject(
-                    `Publication year can not be later than ${publicationYearMaxValue}`
+                    `Publication year can not be later than ${publicationYearMaxValue}!`
                   );
                 }
                 return Promise.resolve();
@@ -165,7 +165,7 @@ const BookModal = ({
                   return Promise.resolve();
                 }
                 if (!value.match(isbnRegExp)) {
-                  return Promise.reject('Invalid ISBN');
+                  return Promise.reject('Invalid ISBN!');
                 }
                 return Promise.resolve();
               },
