@@ -3,7 +3,6 @@ export const publicationYear = 'publicationYear';
 export const rating = 'rating';
 export const noKey = 'noKey';
 export const noKeyHeader = 'Not specified';
-export const recommendedBookTitle = 'Recommended Book';
 
 export const groupBooksByKeyWithSort = (arr, key) => {
   const newArr = [...arr];

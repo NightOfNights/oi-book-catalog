@@ -44,11 +44,7 @@ const BookCatalog = ({ books, onBookDelete, onBookEdit, onBookAdd }) => {
   const recommendedBook = selectRecommendedBookFromCatalog(books);
 
   const recommendedBookPanel = recommendedBook ? (
-    <Panel
-      header={recommendedBookTitle}
-      key={0}
-      className="book-catalog__panel"
-    >
+    <Panel header={'Recommended Book'} key={0} className="book-catalog__panel">
       <BookCard
         id={recommendedBook.id}
         name={recommendedBook.name}
