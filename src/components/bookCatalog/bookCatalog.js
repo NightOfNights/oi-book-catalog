@@ -61,17 +61,17 @@ const BookCatalog = ({ books, onBookDelete, onBookEdit, onBookAdd }) => {
     </Panel>
   ) : null;
 
-  const bookList = sortedBookKeys.reduce((currentResult, currentValue, idx) => {
+  const bookList = sortedBookKeys.reduce((currentResult, currentValue) => {
     const panel = (
       <Panel
         header={currentValue === noKey ? noKeyHeader : currentValue}
-        key={idx + 1}
+        key={currentValue}
         className="book-catalog__panel"
       >
-        <Row gutter={16} className="book-catalog__panel-row">
+        <Row gutter={[16, 16]} className="book-catalog__panel-row">
           {booksSortedByKey[currentValue].map((book) => {
             return (
-              <Col span={8} key={book.id} className="book-catalog__panel-col">
+              <Col span={12} key={book.id} className="book-catalog__panel-col">
                 <BookCard
                   id={book.id}
                   name={book.name}
@@ -124,7 +124,7 @@ const BookCatalog = ({ books, onBookDelete, onBookEdit, onBookAdd }) => {
             Add new book
           </Button>
         </div>
-        <Collapse defaultActiveKey={['0']} className="book-catalog__collapse">
+        <Collapse defaultActiveKey={[0]} className="book-catalog__collapse">
           {recommendedBookPanel}
           {bookList}
         </Collapse>
