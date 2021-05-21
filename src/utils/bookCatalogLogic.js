@@ -9,7 +9,7 @@ export const groupBooksByKeyWithSort = (arr, key) => {
 
   return newArr
     .sort((a, b) => {
-      if (a.name > b.name) {
+      if (a.name.toUpperCase() > b.name.toUpperCase()) {
         return 1;
       } else {
         return -1;
