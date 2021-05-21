@@ -25,13 +25,13 @@ const MainPage = () => {
     { idField: 'id' }
   );
 
-  const handleBookDelete = async (id) => {
-    await firestore.collection('books').doc(id).delete();
+  const handleBookDelete = (id) => {
+    firestore.collection('books').doc(id).delete();
   };
 
-  const handleAddBookModalClickOk = async (data) => {
+  const handleAddBookModalClickOk = (data) => {
     setIsAddBookModalVisible(false);
-    await firestore.collection('books').add(data);
+    firestore.collection('books').add(data);
   };
 
   const handleAddBookModalClickCancel = () => {
@@ -47,7 +47,7 @@ const MainPage = () => {
     setCurrentEditingBook(bookCard);
   };
 
-  const handleEditBookModalClickOk = async (data) => {
+  const handleEditBookModalClickOk = (data) => {
     const editedData = {
       ...data,
       publicationYear: data.publicationYear ? data.publicationYear : null,
@@ -56,10 +56,7 @@ const MainPage = () => {
     };
 
     setIsEditBookModalVisible(false);
-    await firestore
-      .collection('books')
-      .doc(currentEditingBook.id)
-      .update(editedData);
+    firestore.collection('books').doc(currentEditingBook.id).update(editedData);
   };
 
   const handleEditBookModalClickCancel = () => {
