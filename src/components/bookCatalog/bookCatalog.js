@@ -11,7 +11,6 @@ import {
   rating,
   noKeyHeader,
   publicationYear,
-  recommendedBookTitle,
 } from '../../utils/bookCatalogLogic';
 import './bookCatalog.scss';
 
