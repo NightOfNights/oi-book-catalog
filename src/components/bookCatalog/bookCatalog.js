@@ -89,7 +89,6 @@ const BookCatalog = ({ books, onBookDelete, onBookEdit, onBookAdd }) => {
   const [sortBy, setSortBy] = useState(publicationYear);
 
   const handleSortByChange = (event) => {
-    console.log('Sort by', event.target.value);
     setSortBy(event.target.value);
   };
 

@@ -26,14 +26,12 @@ const MainPage = () => {
   );
 
   const handleBookDelete = async (id) => {
-    const res = await firestore.collection('books').doc(id).delete();
-    console.log(res);
+    await firestore.collection('books').doc(id).delete();
   };
 
   const handleAddBookModalClickOk = async (data) => {
     setIsAddBookModalVisible(false);
-    const res = await firestore.collection('books').add(data);
-    console.log(res);
+    await firestore.collection('books').add(data);
   };
 
   const handleAddBookModalClickCancel = () => {
@@ -56,14 +54,12 @@ const MainPage = () => {
       rating: data.rating || data.rating === 0 ? data.rating : null,
       ISBN: data.ISBN ? data.ISBN : null,
     };
-    console.log(editedData);
+
     setIsEditBookModalVisible(false);
-    const res = await firestore
+    await firestore
       .collection('books')
       .doc(currentEditingBook.id)
       .update(editedData);
-
-    console.log(res);
   };
 
   const handleEditBookModalClickCancel = () => {
